@@ -1,3 +1,80 @@
+/* Tailwind v4 — utilities only, no preflight reset to avoid conflicts */
+@import "tailwindcss/theme.css";
+@import "tailwindcss/utilities.css";
+
+/* ─── Tailwind v4 theme tokens — shadcnthemer "Vercel" theme (exact values) ─── */
+@theme {
+  --color-background:          oklch(0.99 0 0);
+  --color-foreground:          oklch(0 0 0);
+  --color-card:                oklch(1 0 0);
+  --color-card-foreground:     oklch(0 0 0);
+  --color-popover:             oklch(0.99 0 0);
+  --color-popover-foreground:  oklch(0 0 0);
+  --color-primary:             oklch(0 0 0);
+  --color-primary-foreground:  oklch(1 0 0);
+  --color-secondary:           oklch(0.94 0 0);
+  --color-secondary-foreground:oklch(0 0 0);
+  --color-muted:               oklch(0.97 0 0);
+  --color-muted-foreground:    oklch(0.44 0 0);
+  --color-accent:              oklch(0.94 0 0);
+  --color-accent-foreground:   oklch(0 0 0);
+  --color-destructive:         oklch(0.63 0.19 23.03);
+  --color-destructive-fg:      oklch(1 0 0);
+  --color-border:              oklch(0.92 0 0);
+  --color-input:               oklch(0.94 0 0);
+  --color-ring:                oklch(0 0 0);
+  --color-sidebar:             oklch(0.99 0 0);
+  --color-sidebar-foreground:  oklch(0 0 0);
+  --color-sidebar-primary:     oklch(0 0 0);
+  --color-sidebar-pf:          oklch(1 0 0);
+  --color-sidebar-accent:      oklch(0.94 0 0);
+  --color-sidebar-af:          oklch(0 0 0);
+  --color-sidebar-border:      oklch(0.94 0 0);
+  --color-sidebar-ring:        oklch(0 0 0);
+  /* chart palette */
+  --color-chart-1:             oklch(0.81 0.17 75.35);
+  --color-chart-2:             oklch(0.55 0.22 264.53);
+  --color-chart-3:             oklch(0.72 0 0);
+  --color-chart-4:             oklch(0.92 0 0);
+  --color-chart-5:             oklch(0.56 0 0);
+  /* medical accent (teal) kept for clinical UI */
+  --color-teal:                oklch(0.55 0.13 181);
+  --color-teal-light:          oklch(0.95 0.04 181);
+}
+
+/* ─── shadcn CSS variable tokens — exact "Vercel" theme OKLCH values ─── */
+:root {
+  --background:           oklch(0.99 0 0);
+  --foreground:           oklch(0 0 0);
+  --card:                 oklch(1 0 0);
+  --card-foreground:      oklch(0 0 0);
+  --popover:              oklch(0.99 0 0);
+  --popover-foreground:   oklch(0 0 0);
+  --primary:              oklch(0 0 0);
+  --primary-foreground:   oklch(1 0 0);
+  --secondary:            oklch(0.94 0 0);
+  --secondary-foreground: oklch(0 0 0);
+  --muted:                oklch(0.97 0 0);
+  --muted-foreground:     oklch(0.44 0 0);
+  --accent:               oklch(0.94 0 0);
+  --accent-foreground:    oklch(0 0 0);
+  --destructive:          oklch(0.63 0.19 23.03);
+  --destructive-foreground: oklch(1 0 0);
+  --border:               oklch(0.92 0 0);
+  --input:                oklch(0.94 0 0);
+  --ring:                 oklch(0 0 0);
+  --radius:               0.625rem;
+  /* sidebar */
+  --sidebar:              oklch(0.99 0 0);
+  --sidebar-foreground:   oklch(0 0 0);
+  --sidebar-primary:      oklch(0 0 0);
+  --sidebar-primary-fg:   oklch(1 0 0);
+  --sidebar-accent:       oklch(0.94 0 0);
+  --sidebar-accent-fg:    oklch(0 0 0);
+  --sidebar-border:       oklch(0.94 0 0);
+  --sidebar-ring:         oklch(0 0 0);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,50 +82,56 @@
 }
 
 :root {
-  /* Primary Colors - Harvey inspired */
-  --color-bg: #f5f4f1;
-  --color-bg-alt: #edecea;
-  --color-surface: #ffffff;
-  --color-surface-hover: #fafafa;
-  --color-border: #e5e5e5;
-  --color-border-light: #eeeeee;
-  
-  /* Text Colors */
-  --color-text: #1a1a1a;
-  --color-text-secondary: #666666;
-  --color-text-muted: #888888;
-  --color-text-light: #aaaaaa;
-  
-  /* Accent Colors - Medical appropriate */
-  --color-primary: #1a1a1a;
-  --color-primary-hover: #333333;
-  --color-accent: #0d9488;
-  --color-accent-light: rgba(13, 148, 136, 0.1);
-  --color-success: #059669;
-  --color-success-light: rgba(5, 150, 105, 0.1);
-  --color-warning: #d97706;
-  --color-warning-light: rgba(217, 119, 6, 0.1);
-  --color-info: #0284c7;
-  --color-info-light: rgba(2, 132, 199, 0.1);
-  
-  /* Fonts */
+  /* ── Vercel theme palette applied to app custom properties ── */
+
+  /* Surfaces */
+  --color-bg:             oklch(0.99 0 0);   /* background */
+  --color-bg-alt:         oklch(0.94 0 0);   /* secondary */
+  --color-surface:        oklch(1 0 0);      /* card */
+  --color-surface-hover:  oklch(0.97 0 0);   /* muted */
+  --color-border:         oklch(0.92 0 0);   /* border */
+  --color-border-light:   oklch(0.94 0 0);   /* input / sidebar-border */
+
+  /* Text */
+  --color-text:           oklch(0 0 0);      /* foreground */
+  --color-text-secondary: oklch(0.44 0 0);   /* muted-foreground */
+  --color-text-muted:     oklch(0.55 0 0);
+  --color-text-light:     oklch(0.72 0 0);
+
+  /* Brand */
+  --color-primary:        oklch(0 0 0);      /* primary */
+  --color-primary-hover:  oklch(0.18 0 0);
+
+  /* Medical accent (teal — kept for clinical elements) */
+  --color-accent:         oklch(0.55 0.13 181);
+  --color-accent-light:   oklch(0.95 0.04 181 / 0.3);
+
+  /* Status */
+  --color-success:        #059669;
+  --color-success-light:  rgba(5, 150, 105, 0.1);
+  --color-warning:        #d97706;
+  --color-warning-light:  rgba(217, 119, 6, 0.1);
+  --color-info:           #0284c7;
+  --color-info-light:     rgba(2, 132, 199, 0.1);
+
+  /* Fonts (preserved from original) */
   --font-serif: 'Libre Baskerville', Georgia, serif;
-  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  
-  /* Spacing */
-  --sidebar-width: 260px;
-  --header-height: 64px;
-  
+  --font-sans:  'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Layout */
+  --sidebar-width:  260px;
+  --header-height:  64px;
+
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-  
-  /* Border Radius */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.14);
+
+  /* Border Radius — matches theme radius: 0.625rem */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
 }
 
 body {
@@ -73,6 +156,7 @@ body {
   border-right: 1px solid var(--color-border);
   padding: 24px 16px;
   display: flex;
+  transition: width 0.3s ease, padding 0.3s ease;
   flex-direction: column;
   position: fixed;
   height: 100vh;
@@ -170,6 +254,38 @@ body {
   border-top: 1px solid var(--color-border-light);
 }
 
+/* Collapsed Sidebar */
+.sidebar.collapsed {
+  width: 64px;
+  padding: 24px 8px;
+}
+
+.sidebar.collapsed .logo-text,
+.sidebar.collapsed .logo-subtitle,
+.sidebar.collapsed .nav-section-title,
+.sidebar.collapsed .nav-label,
+.sidebar.collapsed .sidebar-user-info {
+  display: none;
+}
+
+.sidebar.collapsed .nav-item {
+  justify-content: center;
+  padding: 10px;
+}
+
+.sidebar.collapsed .nav-icon {
+  opacity: 0.7;
+}
+
+.sidebar.collapsed .nav-item.active .nav-icon,
+.sidebar.collapsed .nav-item:hover .nav-icon {
+  opacity: 1;
+}
+
+.main-content.sidebar-collapsed {
+  margin-left: 64px;
+}
+
 /* Main Content */
 .main-content {
   flex: 1;
@@ -177,6 +293,7 @@ body {
   padding: 32px 48px;
   background: var(--color-surface);
   min-height: 100vh;
+  transition: margin-left 0.3s ease;
 }
 
 /* Page Header */
@@ -243,7 +360,7 @@ body {
 
 .btn-primary {
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-primary-foreground);
 }
 
 .btn-primary:hover {
@@ -759,7 +876,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--color-primary-foreground);
   font-family: var(--font-serif);
   font-size: 22px;
   font-weight: 700;
@@ -937,7 +1054,7 @@ body {
   width: 16px;
   height: 16px;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-primary-foreground);
   font-size: 9px;
   font-weight: 600;
   border-radius: 3px;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import { Routes, Route, NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { 
-  LayoutGrid, Users, GitBranch, Clock, BookOpen, Settings, 
+import { Routes, Route, NavLink, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import {
+  LayoutGrid, Users, GitBranch, Clock, BookOpen, Settings,
   HelpCircle, Search, Upload, FileText, Star, ChevronRight,
   Check, Edit3, Download, Send, X, ArrowLeft, Eye,
   TrendingUp, Zap, Shield, Activity, File, Folder,
@@ -9,58 +9,17 @@ import {
 } from 'lucide-react';
 import { translations } from './i18n/translations';
 import { patients, documentHistory } from './data/patients';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { ThemeProvider, useTheme } from './contexts/ThemeContext';
+import SidebarComponent from './components/Sidebar';
+import LoginPage from './components/LoginPage';
 
 // Language Context
 const LanguageContext = createContext();
 
 export const useLanguage = () => useContext(LanguageContext);
 
-// Sidebar Component
-const Sidebar = () => {
-  const { lang, t } = useLanguage();
-  
-  return (
-    <aside className="sidebar">
-      <div className="logo">
-        Avira
-      </div>
-      <div className="logo-subtitle">Medical Co-Pilot</div>
-      
-      <nav className="nav-section">
-        <div className="nav-section-title">{lang === 'de' ? 'Hauptmenü' : 'Main Menu'}</div>
-        <NavLink to="/" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <LayoutGrid className="nav-icon" />
-          {t.nav.assistant}
-        </NavLink>
-        <NavLink to="/workflows" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <GitBranch className="nav-icon" />
-          {t.nav.workflows}
-        </NavLink>
-        <NavLink to="/history" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <Clock className="nav-icon" />
-          {t.nav.history}
-        </NavLink>
-        <NavLink to="/guidelines" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <BookOpen className="nav-icon" />
-          {t.nav.guidelines}
-        </NavLink>
-      </nav>
-      
-
-      
-      <div className="sidebar-footer">
-        <NavLink to="/settings" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <Settings className="nav-icon" />
-          {t.nav.settings}
-        </NavLink>
-        <div className="nav-item">
-          <HelpCircle className="nav-icon" />
-          {t.nav.help}
-        </div>
-      </div>
-    </aside>
-  );
-};
+// Sidebar is now the collapsible component from ./components/Sidebar
 
 // Patient Selection Modal
 const PatientModal = ({ isOpen, onClose, onSelect, selectedPatient }) => {
@@ -406,7 +365,7 @@ const DashboardPage = () => {
                 fontFamily: 'inherit',
                 lineHeight: 1.7,
                 resize: 'vertical',
-                background: '#fff'
+                background: 'var(--color-surface)'
               }}
               placeholder={lang === 'de' 
                 ? 'Beginnen Sie hier mit dem Schreiben Ihres Dokuments...\n\nBeispiel:\n\nSehr geehrte Kolleginnen und Kollegen,\n\nwir berichten über die stationäre Behandlung von Herrn/Frau [Patient]...'
@@ -582,7 +541,7 @@ const ProcessingPage = () => {
                 ) : index === currentStep ? (
                   <div className="spinner" />
                 ) : (
-                  <div style={{ width: 20, height: 20, borderRadius: '50%', border: '2px solid #ddd' }} />
+                  <div style={{ width: 20, height: 20, borderRadius: '50%', border: '2px solid var(--color-border)' }} />
                 )}
               </div>
               <div className="step-content">
@@ -1114,17 +1073,17 @@ const FormOutputPage = () => {
       <div className="document-container">
         {/* Form */}
         <div className="document" style={{ padding: 0 }}>
-          <div style={{ padding: '32px', borderBottom: '1px solid #eee', background: '#fafafa' }}>
+          <div style={{ padding: '32px', borderBottom: '1px solid var(--color-border)', background: 'var(--color-bg-alt)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5, color: '#888', marginBottom: 4 }}>
+                <div style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5, color: 'var(--color-text-muted)', marginBottom: 4 }}>
                   {lang === 'de' ? 'Formular' : 'Form'}
                 </div>
                 <div style={{ fontSize: 20, fontWeight: 600 }}>
                   {lang === 'de' ? 'Antrag auf Anschlussheilbehandlung (AHB)' : 'Application for Follow-up Rehabilitation'}
                 </div>
               </div>
-              <div style={{ textAlign: 'right', fontSize: 12, color: '#888' }}>
+              <div style={{ textAlign: 'right', fontSize: 12, color: 'var(--color-text-muted)' }}>
                 <div>{lang === 'de' ? 'Formular-Nr.' : 'Form No.'}: AHB-001</div>
                 <div>{lang === 'de' ? 'Version' : 'Version'}: 2024-01</div>
               </div>
@@ -1132,30 +1091,30 @@ const FormOutputPage = () => {
           </div>
           
           {formFields.map((section, sIdx) => (
-            <div key={sIdx} style={{ padding: '24px 32px', borderBottom: '1px solid #eee' }}>
-              <div style={{ fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5, color: '#888', marginBottom: 16 }}>
+            <div key={sIdx} style={{ padding: '24px 32px', borderBottom: '1px solid var(--color-border)' }}>
+              <div style={{ fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5, color: 'var(--color-text-muted)', marginBottom: 16 }}>
                 {section.section}
               </div>
               
               <div style={{ display: 'grid', gap: 16 }}>
                 {section.fields.map((field, fIdx) => (
                   <div key={fIdx} style={{ display: 'grid', gridTemplateColumns: '180px 1fr auto', gap: 16, alignItems: 'start' }}>
-                    <div style={{ fontSize: 13, color: '#666', paddingTop: 2 }}>{field.label}</div>
+                    <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', paddingTop: 2 }}>{field.label}</div>
                     <div style={{ 
                       fontSize: 14, 
-                      color: '#1a1a1a', 
-                      background: '#f8f8f8', 
+                      color: 'var(--color-text)', 
+                      background: 'var(--color-input)', 
                       padding: '8px 12px', 
                       borderRadius: 6,
-                      border: '1px solid #eee',
+                      border: '1px solid var(--color-border)',
                       whiteSpace: 'pre-wrap'
                     }}>
                       {field.value}
                     </div>
                     <div style={{ 
                       fontSize: 10, 
-                      color: '#0d9488', 
-                      background: 'rgba(13, 148, 136, 0.1)', 
+                      color: 'var(--color-accent)', 
+                      background: 'var(--color-accent-light)', 
                       padding: '4px 8px', 
                       borderRadius: 4,
                       whiteSpace: 'nowrap'
@@ -1168,19 +1127,19 @@ const FormOutputPage = () => {
             </div>
           ))}
           
-          <div style={{ padding: '24px 32px', background: '#fafafa' }}>
+          <div style={{ padding: '24px 32px', background: 'var(--color-bg-alt)' }}>
             <div style={{ display: 'flex', gap: 24, justifyContent: 'center' }}>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ width: 200, height: 60, border: '1px dashed #ccc', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 8, background: '#fff' }}>
-                  <span style={{ fontSize: 12, color: '#888' }}>{lang === 'de' ? 'Unterschrift Arzt' : 'Physician Signature'}</span>
+                <div style={{ width: 200, height: 60, border: '1px dashed var(--color-border-light)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 8, background: 'var(--color-surface)' }}>
+                  <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>{lang === 'de' ? 'Unterschrift Arzt' : 'Physician Signature'}</span>
                 </div>
-                <div style={{ fontSize: 11, color: '#888' }}>{patient.attendingPhysician}</div>
+                <div style={{ fontSize: 11, color: 'var(--color-text-muted)' }}>{patient.attendingPhysician}</div>
               </div>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ width: 200, height: 60, border: '1px dashed #ccc', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 8, background: '#fff' }}>
-                  <span style={{ fontSize: 12, color: '#888' }}>{lang === 'de' ? 'Stempel Klinik' : 'Hospital Stamp'}</span>
+                <div style={{ width: 200, height: 60, border: '1px dashed var(--color-border-light)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 8, background: 'var(--color-surface)' }}>
+                  <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>{lang === 'de' ? 'Stempel Klinik' : 'Hospital Stamp'}</span>
                 </div>
-                <div style={{ fontSize: 11, color: '#888' }}>{lang === 'de' ? 'Universitätsklinikum Frankfurt' : 'University Hospital Frankfurt'}</div>
+                <div style={{ fontSize: 11, color: 'var(--color-text-muted)' }}>{lang === 'de' ? 'Universitätsklinikum Frankfurt' : 'University Hospital Frankfurt'}</div>
               </div>
             </div>
           </div>
@@ -1306,6 +1265,7 @@ const GuidelinesPage = () => {
 // Settings Page
 const SettingsPage = () => {
   const { lang, setLang, t } = useLanguage();
+  const { theme, setTheme } = useTheme();
   
   return (
     <main className="main-content">
@@ -1314,7 +1274,7 @@ const SettingsPage = () => {
         <p className="page-subtitle">{t.settings.subtitle}</p>
       </div>
       
-      <div className="card" style={{ maxWidth: 600 }}>
+      <div className="card" style={{ maxWidth: 600, marginBottom: 24 }}>
         <div className="card-title">{t.settings.language}</div>
         <div className="language-toggle">
           <button 
@@ -1331,31 +1291,83 @@ const SettingsPage = () => {
           </button>
         </div>
       </div>
+
+      <div className="card" style={{ maxWidth: 600 }}>
+        <div className="card-title">{t.settings.appearance}</div>
+        <div style={{ marginBottom: 16 }}>
+          <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-text-secondary)', marginBottom: 8 }}>
+            {t.settings.theme}
+          </div>
+          <div className="language-toggle">
+            <button 
+              className={`language-btn ${theme === 'light' ? 'active' : ''}`}
+              onClick={() => setTheme('light')}
+            >
+              ☀️ {t.settings.light}
+            </button>
+            <button 
+              className={`language-btn ${theme === 'dark' ? 'active' : ''}`}
+              onClick={() => setTheme('dark')}
+            >
+              🌙 {t.settings.dark}
+            </button>
+          </div>
+        </div>
+      </div>
     </main>
   );
 };
 
-// Main App Component
-function App() {
+// Inner App: uses auth context
+function AppInner() {
   const [lang, setLang] = useState('de');
   const t = translations[lang];
-  
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const { isAuthenticated } = useAuth();
+
+  // Update --sidebar-width CSS variable so all .main-content elements respond
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      '--sidebar-width',
+      isCollapsed ? '64px' : '260px'
+    );
+  }, [isCollapsed]);
+
   return (
     <LanguageContext.Provider value={{ lang, setLang, t }}>
-      <div className="app-container">
-        <Sidebar />
+      {!isAuthenticated ? (
         <Routes>
-          <Route path="/" element={<DashboardPage />} />
-          <Route path="/workflows" element={<WorkflowsPage />} />
-          <Route path="/history" element={<HistoryPage />} />
-          <Route path="/guidelines" element={<GuidelinesPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/generate" element={<ProcessingPage />} />
-          <Route path="/output" element={<OutputPage />} />
-          <Route path="/form-output" element={<FormOutputPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
-      </div>
+      ) : (
+        <div className="app-container">
+          <SidebarComponent isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+          <Routes>
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/workflows" element={<WorkflowsPage />} />
+            <Route path="/history" element={<HistoryPage />} />
+            <Route path="/guidelines" element={<GuidelinesPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/generate" element={<ProcessingPage />} />
+            <Route path="/output" element={<OutputPage />} />
+            <Route path="/form-output" element={<FormOutputPage />} />
+            <Route path="/login" element={<Navigate to="/" replace />} />
+          </Routes>
+        </div>
+      )}
     </LanguageContext.Provider>
+  );
+}
+
+// Main App Component
+function App() {
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <AppInner />
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 
