@@ -37,7 +37,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
         {!isCollapsed && (
           <div className="logo" style={{ margin: 0, padding: 0 }}>
             <div className="logo-icon">A</div>
-            <span className="logo-text">Avira</span>
+            <span className="logo-text">Medical Co-Pilot</span>
           </div>
         )}
         {isCollapsed && (

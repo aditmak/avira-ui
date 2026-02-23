@@ -1,4 +1,4 @@
-// Sample patient data for Avira Medical demo
+// Sample patient data for Medical Co-Pilot demo
 export const patients = [
   {
     id: 'P-2024-001847',

@@ -3,14 +3,14 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const AuthContext = createContext(null);
 
 const DEMO_USER = {
-  email: 'admin@avira.com',
-  password: 'AviraMedical',
+  email: 'admin@medicalcopilot.com',
+  password: 'MedicalCoPilot',
   name: 'Admin',
   role: 'Administrator',
   initials: 'AA',
 };
 
-const STORAGE_KEY = 'avira_auth_user';
+const STORAGE_KEY = 'medical_copilot_auth_user';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {

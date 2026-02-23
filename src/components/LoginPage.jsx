@@ -31,7 +31,7 @@ const copy = {
   en: {
     headline: 'Everything you need for',
     headlineHighlight: 'Medical Documentation',
-    subtitle: 'Managing clinical documentation across multiple departments is time-consuming and error-prone. Avira automates the entire process — from patient data to compliant, structured documents in seconds.',
+    subtitle: 'Managing clinical documentation across multiple departments is time-consuming and error-prone. Medical Co-Pilot automates the entire process — from patient data to compliant, structured documents in seconds.',
     features: [
       { icon: FileText, title: 'Smart Documentation',    desc: 'Auto-generate discharge letters, operation reports, and clinical forms from patient data in seconds.' },
       { icon: Globe,    title: 'Multi-Language Support', desc: 'Create documents in 50+ languages with region-specific compliance rules built in.' },
@@ -53,7 +53,7 @@ const copy = {
     or: 'or',
     continueEmail: 'Continue with Email',
     emailLabel: 'Email address',
-    emailPlaceholder: 'admin@avira.com',
+    emailPlaceholder: 'admin@medicalcopilot.com',
     passwordLabel: 'Password',
     passwordPlaceholder: '••••••••••••',
     signIn: 'Sign In',
@@ -66,7 +66,7 @@ const copy = {
     back: 'Back',
     invalidCredentials: 'Invalid email or password. Please try again.',
     scrollLabel: 'LEARN MORE',
-    footerText: '© 2025 Avira Medical. All rights reserved.',
+    footerText: '© 2025 Medical Co-Pilot. All rights reserved.',
     terms: 'By signing in, you agree to our Terms of Service and Privacy Policy.',
     welcomeBack: 'Welcome back',
     signInTo: 'Sign in to your workspace',
@@ -74,7 +74,7 @@ const copy = {
   de: {
     headline: 'Alles, was Sie brauchen für',
     headlineHighlight: 'Medizinische Dokumentation',
-    subtitle: 'Klinische Dokumentation über mehrere Abteilungen hinweg ist zeitaufwändig und fehleranfällig. Avira automatisiert den gesamten Prozess — von Patientendaten zu konformen, strukturierten Dokumenten in Sekunden.',
+    subtitle: 'Klinische Dokumentation über mehrere Abteilungen hinweg ist zeitaufwändig und fehleranfällig. Medical Co-Pilot automatisiert den gesamten Prozess — von Patientendaten zu konformen, strukturierten Dokumenten in Sekunden.',
     features: [
       { icon: FileText, title: 'Intelligente Dokumentation',  desc: 'Entlassbriefe, OP-Berichte und klinische Formulare aus Patientendaten in Sekunden generieren.' },
       { icon: Globe,    title: 'Mehrsprachige Unterstützung', desc: 'Dokumente in 50+ Sprachen mit eingebetteten regionalen Compliance-Regeln erstellen.' },
@@ -96,7 +96,7 @@ const copy = {
     or: 'oder',
     continueEmail: 'Weiter mit E-Mail',
     emailLabel: 'E-Mail-Adresse',
-    emailPlaceholder: 'admin@avira.com',
+    emailPlaceholder: 'admin@medicalcopilot.com',
     passwordLabel: 'Passwort',
     passwordPlaceholder: '••••••••••••',
     signIn: 'Anmelden',
@@ -109,7 +109,7 @@ const copy = {
     back: 'Zurück',
     invalidCredentials: 'Ungültige E-Mail oder Passwort. Bitte erneut versuchen.',
     scrollLabel: 'MEHR ERFAHREN',
-    footerText: '© 2025 Avira Medical. Alle Rechte vorbehalten.',
+    footerText: '© 2025 Medical Co-Pilot. Alle Rechte vorbehalten.',
     terms: 'Mit der Anmeldung stimmen Sie unseren Nutzungsbedingungen und der Datenschutzerklärung zu.',
     welcomeBack: 'Willkommen zurück',
     signInTo: 'Melden Sie sich in Ihrem Workspace an',
@@ -247,7 +247,7 @@ const LoginCard = ({ c, lang }) => {
           </div>
           <div>
             <h2 className="text-2xl font-bold" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-serif)' }}>
-              {mode === 'initial' ? 'Avira Medical' : c.welcomeBack}
+              {mode === 'initial' ? 'Medical Co-Pilot' : c.welcomeBack}
             </h2>
             <p className="mt-1" style={{ color: 'var(--muted-foreground)', fontSize: '14px' }}>
               {mode === 'initial'

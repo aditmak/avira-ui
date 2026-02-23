@@ -1,6 +1,6 @@
-# Avira Medical - KI-Co-Pilot Demo
+# Medical Co-Pilot - KI-Co-Pilot Demo
 
-A demonstration application for Avira Medical's AI-powered clinical documentation assistant for Hospital Information Systems (KIS).
+A demonstration application for Medical Co-Pilot's AI-powered clinical documentation assistant for Hospital Information Systems (KIS).
 
 ## Features
 
@@ -79,7 +79,7 @@ Upload the contents of the `dist/` folder to any static web server (Apache, Ngin
 ## Project Structure
 
 ```
-avira-medical-demo/
+medical-copilot-demo/
 ├── src/
 │   ├── App.jsx          # Main app with all components
 │   ├── main.jsx         # Entry point
@@ -125,4 +125,4 @@ avira-medical-demo/
 
 ## License
 
-Proprietary - Avira Medical © 2026
+Proprietary - Medical Co-Pilot © 2026
